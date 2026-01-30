@@ -20,6 +20,9 @@ class HotbarUI {
      * Initialiser la hotbar
      */
     _init() {
+        // Vider le container d'abord
+        this.container.innerHTML = '';
+        
         // Créer la hotbar
         const hotbar = document.createElement('div');
         hotbar.id = 'hotbar';
@@ -38,8 +41,8 @@ class HotbarUI {
         
         this.container.appendChild(hotbar);
         
-        // Référence les slots
-        this.slotElements = Array.from(document.querySelectorAll('.hotbar-slot'));
+        // Référence les slots - chercher seulement dans le hotbar créé
+        this.slotElements = Array.from(hotbar.querySelectorAll('.hotbar-slot'));
         
         // Ajouter le seau au slot 0
         this.inventory.addItem('bucket', 1);
@@ -77,6 +80,12 @@ class HotbarUI {
         
         this.slotElements.forEach((slotEl, index) => {
             const contentDiv = slotEl.querySelector('.slot-content');
+            
+            if (!contentDiv) {
+                console.warn(`⚠️ Slot ${index} n'a pas de .slot-content`);
+                return;
+            }
+            
             contentDiv.innerHTML = '';
             
             if (index < items.length) {
