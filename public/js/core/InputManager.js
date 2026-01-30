@@ -160,6 +160,11 @@ class InputManager {
                     x: this.mouse.gridX,
                     y: this.mouse.gridY
                 });
+            } else if (e.button === 2) {  // Clic droit
+                this.eventBus.emit('tile:rightclick', {
+                    x: this.mouse.gridX,
+                    y: this.mouse.gridY
+                });
             }
         }
         

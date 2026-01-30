@@ -9,6 +9,7 @@ import EventBus from '../utils/EventBus.js';
 import Inventory from '../ecs/components/Inventory.js';
 
 import UIManager from '../ui/UIManager.js';
+import HotbarUI from '../ui/HotbarUI.js';
 import SystemManager from '../ecs/SystemManager.js';
 import RenderSystem from '../ecs/systems/RenderSystem.js';
 
@@ -48,6 +49,7 @@ class Game {
 
         this.systemManager = new SystemManager();
         this.ui = new UIManager(this, "#game-container #ui-panel");
+        this.hotbarUI = new HotbarUI(this, "#bottom-panel");
 
         this.running = false;
         this.paused = false;
@@ -71,14 +73,19 @@ class Game {
         this.input.on('tile:click', (gridPos) => {
             const tile = this.world.grid.getTile(gridPos.x, gridPos.y);
             if (tile) {
-                // Tenter de récolter la ressource
-                this._tryHarvestResource(tile);
-                
                 this.eventBus.emit('tile:click', { 
                     gridX: gridPos.x, 
                     gridY: gridPos.y, 
                     tile
                 });
+            }
+        });
+
+        // Clic droit = récolte
+        this.input.on('tile:rightclick', (gridPos) => {
+            const tile = this.world.grid.getTile(gridPos.x, gridPos.y);
+            if (tile) {
+                this._tryHarvestResource(tile);
             }
         });
         this.input.on('camera:move', (delta) => {
@@ -142,8 +149,12 @@ class Game {
     _tryHarvestResource(tile) {
         const selectedTool = this.playerInventory.getSelectedItem();
         
+        console.log(`🔍 Click sur ${tile.type} - Outil: ${selectedTool || 'none'}`);
+        
         // Vérifier si on peut récolter cette tile
         const resource = this.resourceManager.getResource(tile.type, selectedTool);
+        
+        console.log(`📦 Ressource trouvée:`, resource);
         
         if (resource) {
             const added = this.playerInventory.addItem(resource.item, resource.quantity);
