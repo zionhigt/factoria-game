@@ -3,8 +3,10 @@ import SpriteManager from '../rendering/SpriteManager.js';
 import Camera from '../rendering/Camera.js';
 import IsoRenderer from '../rendering/IsoRenderer.js';
 import WorldManager from '../world/WorldManager.js';
+import ResourceManager from '../world/ResourceManager.js';
 import InputManager from "./InputManager.js";
 import EventBus from '../utils/EventBus.js';
+import Inventory from '../ecs/components/Inventory.js';
 
 import UIManager from '../ui/UIManager.js';
 import SystemManager from '../ecs/SystemManager.js';
@@ -38,6 +40,11 @@ class Game {
         this.renderer = new IsoRenderer(this.ctx, this.camera, this.spriteManager);
         this.input = new InputManager(this.canvas, this.camera);
         this.world = new WorldManager();
+        this.resourceManager = new ResourceManager();
+        
+        // Créer l'inventaire du joueur
+        this.playerInventory = new Inventory(20);
+        this.playerInventory.addItem('bucket', 1);  // Donner un seau au démarrage
 
         this.systemManager = new SystemManager();
         this.ui = new UIManager(this, "#game-container #ui-panel");
@@ -64,6 +71,9 @@ class Game {
         this.input.on('tile:click', (gridPos) => {
             const tile = this.world.grid.getTile(gridPos.x, gridPos.y);
             if (tile) {
+                // Tenter de récolter la ressource
+                this._tryHarvestResource(tile);
+                
                 this.eventBus.emit('tile:click', { 
                     gridX: gridPos.x, 
                     gridY: gridPos.y, 
@@ -126,6 +136,36 @@ class Game {
         this.camera.update(time);
         return;
     }
+    /**
+     * Récolter une ressource sur une tile
+     */
+    _tryHarvestResource(tile) {
+        const selectedTool = this.playerInventory.getSelectedItem();
+        
+        // Vérifier si on peut récolter cette tile
+        const resource = this.resourceManager.getResource(tile.type, selectedTool);
+        
+        if (resource) {
+            const added = this.playerInventory.addItem(resource.item, resource.quantity);
+            
+            if (added > 0) {
+                console.log(`✓ ${added}x ${resource.name} ajouté à l'inventaire`);
+                this.eventBus.emit('inventory:update', {
+                    item: resource.item,
+                    quantity: this.playerInventory.getQuantity(resource.item)
+                });
+            } else {
+                console.log('❌ Inventaire plein !');
+            }
+        } else if (this.resourceManager.tileResources[tile.type]) {
+            // Il y a une ressource mais on n'a pas l'outil requis
+            const resInfo = this.resourceManager.tileResources[tile.type];
+            if (resInfo.requiredTool) {
+                console.log(`⚠️ Besoin d'un ${resInfo.requiredTool} pour récolter ici`);
+            }
+        }
+    }
+
     _init() {
         this.systemManager.addSystem(new RenderSystem(this.renderer, this.camera));
 

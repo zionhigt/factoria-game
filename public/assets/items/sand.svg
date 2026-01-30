@@ -1,0 +1,14 @@
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tas de sable -->
+  <polygon points="2,12 4,6 6,4 10,4 12,6 14,12" fill="#F4A460" stroke="#CD853F" stroke-width="1"/>
+  
+  <!-- Texture sable - points -->
+  <circle cx="5" cy="8" r="0.6" fill="#CD853F"/>
+  <circle cx="8" cy="7" r="0.6" fill="#CD853F"/>
+  <circle cx="11" cy="8" r="0.6" fill="#CD853F"/>
+  <circle cx="7" cy="10" r="0.6" fill="#CD853F"/>
+  <circle cx="10" cy="9" r="0.6" fill="#CD853F"/>
+  
+  <!-- Ombre -->
+  <polygon points="2,12 14,12 14,13 2,13" fill="#CD853F" opacity="0.3"/>
+</svg>

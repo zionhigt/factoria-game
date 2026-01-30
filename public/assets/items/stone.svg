@@ -1,0 +1,11 @@
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pierre principale -->
+  <polygon points="4,8 6,3 11,4 12,10 9,12 5,11" fill="#808080" stroke="#505050" stroke-width="1"/>
+  
+  <!-- Détails - fissures -->
+  <path d="M 7 5 L 9 9" stroke="#505050" stroke-width="0.5" fill="none"/>
+  <path d="M 8 4 L 10 8" stroke="#505050" stroke-width="0.5" fill="none"/>
+  
+  <!-- Ombre -->
+  <polygon points="9,12 12,10 12,11 9,13" fill="#505050" opacity="0.5"/>
+</svg>
