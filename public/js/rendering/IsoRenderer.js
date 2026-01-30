@@ -26,14 +26,15 @@ class IsoRenderer {
             'grass': 'assets/tiles/grass.png',
             'water': 'assets/tiles/water.png',
             'rock': 'assets/tiles/rock.png',
-            'sand': 'assets/tiles/sand.png'
+            'sand': 'assets/tiles/sand.png',
+            'border': 'assets/tiles/tile_059.png'
         };
 
         // Configuration des offsets et échelles par type de tile
         this.tileConfig = {
             'tree': {
                 scale: 0.5,        // Échelle à 50%
-                offsetY: -20       // Décalage vers le haut de 20px
+                offsetY: -25       // Décalage vers le haut de 35px
             },
             // Autres types peuvent être ajoutés ici
         };

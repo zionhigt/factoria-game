@@ -147,7 +147,37 @@ class WorldManager {
      */
     generateWorld(seed) {
         this.grid.generateTerrain(seed);
+        this._createBorder();
         console.log(`World generated with seed: ${seed}`);
+    }
+
+    /**
+     * Crée une bordure incassable autour de la map
+     */
+    _createBorder() {
+        const { width, height } = this.grid;
+        
+        // Bordures haut et bas
+        for (let x = 0; x < width; x++) {
+            this.grid.getTile(x, 0).type = 'border';
+            this.grid.getTile(x, 0).walkable = false;
+            this.grid.getTile(x, 0).buildable = false;
+            
+            this.grid.getTile(x, height - 1).type = 'border';
+            this.grid.getTile(x, height - 1).walkable = false;
+            this.grid.getTile(x, height - 1).buildable = false;
+        }
+        
+        // Bordures gauche et droite
+        for (let y = 0; y < height; y++) {
+            this.grid.getTile(0, y).type = 'border';
+            this.grid.getTile(0, y).walkable = false;
+            this.grid.getTile(0, y).buildable = false;
+            
+            this.grid.getTile(width - 1, y).type = 'border';
+            this.grid.getTile(width - 1, y).walkable = false;
+            this.grid.getTile(width - 1, y).buildable = false;
+        }
     }
     
     /**

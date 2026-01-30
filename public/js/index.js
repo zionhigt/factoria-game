@@ -11,4 +11,5 @@ game.loadAssets([
     "assets/tiles/rock.png",
     "assets/tiles/sand.png",
     "assets/tiles/tree.png",
+    "assets/tiles/tile_059.png",
 ])

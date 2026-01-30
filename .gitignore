@@ -30,6 +30,7 @@ public/assets/tiles/tile_*.png
 !public/assets/tiles/rock.png
 !public/assets/tiles/sand.png
 !public/assets/tiles/tree.png
+!public/assets/tiles/tile_059.png
 
 # Fichiers temporaires
 *.tmp
