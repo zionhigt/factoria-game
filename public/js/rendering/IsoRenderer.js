@@ -101,8 +101,8 @@ class IsoRenderer {
      * Dessine une tile isométrique (losange)
      */
     drawTile(x, y, tile) {
-        // Charger l'image pour ce type
-        const texturePath = `assets/tiles/${tile.type}.png`;
+        // Charger l'image pour ce type (utiliser la map de textures)
+        const texturePath = this.tileTextures[tile.type] || `assets/tiles/${tile.type}.png`;
         const img = this.spriteManager.getSprite(texturePath);
 
         this.ctx.save();
