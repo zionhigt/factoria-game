@@ -48,7 +48,7 @@ class Game {
         this.hoveredTile = null;
 
         this._setupEvents();
-        this._init();
+        // _init() sera appelé après le chargement des assets
     }
 
     _setupEvents() {
@@ -144,6 +144,7 @@ class Game {
         console.log('📦 Loading assets...');
         await this.spriteManager.loadSprites(assetPaths);
         console.log('✅ Assets loaded');
+        this._init(); // Démarrer le jeu après le chargement
     }
 }
 

@@ -18,6 +18,7 @@ class IsoRenderer {
             grass: '#4CAF50',
             water: '#2196F3',
             rock: '#757575',
+            border: '#8B4513',  // Marron pour la bordure
             gridLine: 'rgba(255, 255, 255, 0.1)'
         };
 
@@ -106,7 +107,8 @@ class IsoRenderer {
 
         this.ctx.save();
 
-        if (img && img.complete) {
+        // Vérifier si l'image est vraiment chargée et valide
+        if (img && img.width && img.height && img.complete) {
             // Configuration spécifique au type (scale, offset)
             const config = this.tileConfig[tile.type] || {};
             const scale = config.scale || 1;

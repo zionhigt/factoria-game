@@ -1,0 +1,32 @@
+#ui-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    & * {
+        pointer-events: auto;
+    }
+
+}
+
+#side-panel-group {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+
+@import 'hotbar/hotbar';
+@import 'hotbar/bag_btn';
+@import 'inventory/panel';
