@@ -1,0 +1,17 @@
+{
+  "name": "factory-game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "css-dev": "sass ./src/assets/scss/style.scss ./public/css/style.css -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "sass": "^1.97.3"
+  }
+}

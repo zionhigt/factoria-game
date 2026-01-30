@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.map
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Assets non utilisés
+# On garde seulement les assets référencés dans le code
+public/assets/tiles/tile_*.png
+
+# Sauf les assets utilisés
+!public/assets/tiles/grass.png
+!public/assets/tiles/water.png
+!public/assets/tiles/rock.png
+!public/assets/tiles/sand.png
+!public/assets/tiles/tree.png
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log
+
+# CSS compilé depuis SCSS (garder le CSS actuel car pas de build SCSS pour le moment)
+# public/css/style.css
+public/css/style.css.map
